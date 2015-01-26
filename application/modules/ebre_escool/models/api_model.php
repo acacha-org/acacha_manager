@@ -62,8 +62,13 @@ class api_model  extends CI_Model  {
 			$school->id = $row->school_id;
 			$school->name = $row->school_name;
 			$school->fullname = $row->school_fullname;
-			$school->logourl = base_url($row->school_logourl);
-			$school->logo_relative_url = $row->school_logourl;
+			if ($row->school_logourl != "") {
+				$school->logourl = base_url($row->school_logourl);
+				$school->logo_relative_url = $row->school_logourl;
+			} else {
+				$school->logourl = "";
+				$school->logo_relative_url = "";
+			}
 			$school->email = $row->school_email;
 			$school->secondary_email = $row->school_secondary_email;
 			$school->secondary_email = $row->school_secondary_email;
@@ -128,8 +133,13 @@ class api_model  extends CI_Model  {
 				$school->id = $row->school_id;
 				$school->name = $row->school_name;
 				$school->fullname = $row->school_fullname;
-				$school->logourl = base_url($row->school_logourl)
-;				$school->logo_relative_url = $row->school_logourl;
+				if ($row->school_logourl != "") {
+					$school->logourl = base_url($row->school_logourl);
+					$school->logo_relative_url = $row->school_logourl;
+				} else {
+					$school->logourl = "";
+					$school->logo_relative_url = "";
+				}
 				$school->email = $row->school_email;
 				$school->secondary_email = $row->school_secondary_email;
 				$school->secondary_email = $row->school_secondary_email;
