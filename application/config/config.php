@@ -15,7 +15,7 @@
 |
 */
 //$config['base_url']	= 'http://localhost/acacha_manager';
-$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/application';  
+$config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/acacha_manager';  
 /*
 |--------------------------------------------------------------------------
 | Index File
