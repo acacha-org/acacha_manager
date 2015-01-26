@@ -14,6 +14,7 @@ class api_model  extends CI_Model  {
     {
         parent::__construct();
         $this->load->database();
+        $this->load->helper('url');
 
     }
 
@@ -32,7 +33,7 @@ class api_model  extends CI_Model  {
 	function getSchool($id){
 	
 		/*
-		SELECT school_id, school_name, school_fullname, school_email, school_secondary_email, 
+		SELECT school_id, school_name, school_fullname, school_logourl, school_email, school_secondary_email, 
 		school_terciary_email, school_official_id, school_locality_id, school_telephoneNumber, 
 		school_mobile, school_bank_account_id, school_notes, school_entryDate, school_last_update, 
 		school_creationUserId, school_lastupdateUserId, school_markedForDeletion, 
@@ -40,7 +41,7 @@ class api_model  extends CI_Model  {
 		FROM school 
 		WHERE school_id=1 
 		*/
-		$this->db->select('school_id, school_name, school_fullname, school_email, school_secondary_email, 
+		$this->db->select('school_id, school_name, school_fullname, school_logourl, school_email, school_secondary_email, 
 		school_terciary_email, school_official_id, school_locality_id, school_telephoneNumber, 
 		school_mobile, school_bank_account_id, school_notes, school_entryDate, school_last_update, 
 		school_creationUserId, school_lastupdateUserId, school_markedForDeletion, 
@@ -61,6 +62,8 @@ class api_model  extends CI_Model  {
 			$school->id = $row->school_id;
 			$school->name = $row->school_name;
 			$school->fullname = $row->school_fullname;
+			$school->logourl = base_url($row->school_logourl);
+			$school->logo_relative_url = $row->school_logourl;
 			$school->email = $row->school_email;
 			$school->secondary_email = $row->school_secondary_email;
 			$school->secondary_email = $row->school_secondary_email;
@@ -88,10 +91,14 @@ class api_model  extends CI_Model  {
 
 	}
 
-	function getSchools(){
+	function getSchoolsAsList(){
+		return $this->getSchools(true);
+	}
+
+	function getSchools ($aslist=false){
 	
 		/*
-		SELECT school_id, school_name, school_fullname, school_email, school_secondary_email, 
+		SELECT school_id, school_name, school_fullname, school_logourl, school_email, school_secondary_email, 
 		school_terciary_email, school_official_id, school_locality_id, school_telephoneNumber, 
 		school_mobile, school_bank_account_id, school_notes, school_entryDate, school_last_update, 
 		school_creationUserId, school_lastupdateUserId, school_markedForDeletion, 
@@ -99,7 +106,7 @@ class api_model  extends CI_Model  {
 		FROM school 
 		WHERE school_id=1 
 		*/
-		$this->db->select('school_id, school_name, school_fullname, school_email, school_secondary_email, 
+		$this->db->select('school_id, school_name, school_fullname, school_logourl, school_email, school_secondary_email, 
 		school_terciary_email, school_official_id, school_locality_id, school_telephoneNumber, 
 		school_mobile, school_bank_account_id, school_notes, school_entryDate, school_last_update, 
 		school_creationUserId, school_lastupdateUserId, school_markedForDeletion, 
@@ -121,6 +128,8 @@ class api_model  extends CI_Model  {
 				$school->id = $row->school_id;
 				$school->name = $row->school_name;
 				$school->fullname = $row->school_fullname;
+				$school->logourl = base_url($row->school_logourl)
+;				$school->logo_relative_url = $row->school_logourl;
 				$school->email = $row->school_email;
 				$school->secondary_email = $row->school_secondary_email;
 				$school->secondary_email = $row->school_secondary_email;
@@ -138,7 +147,12 @@ class api_model  extends CI_Model  {
 				$school->school_markedForDeletion = $row->school_markedForDeletion;
 				$school->school_markedForDeletionDate = $row->school_markedForDeletionDate;
 
-   				$schools_array[$row->school_id] = $school;
+				if ($aslist) {
+					array_push($schools_array, $school);
+				} else {
+					$schools_array[$row->school_id] = $school;
+				}
+   				
 			}
 
 			return $schools_array;

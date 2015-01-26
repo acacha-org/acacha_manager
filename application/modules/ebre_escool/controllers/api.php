@@ -3,7 +3,7 @@
 /**
  * Acacha Manager ebre_escool API
  *
- * @package     Acacha Manage
+ * @package     Acacha Manager
  * @subpackage  API
  * @category    Controller
  * @author         Sergi Tur Badenas
@@ -71,8 +71,17 @@ class api extends REST_Controller {
     
     function schools_get()
     {
-        $schools = $this->api_model->getSchools();
-        
+
+        $aslist = $this->get('aslist'); 
+
+        $schools = array();
+
+        if ($aslist) {
+            $schools = $this->api_model->getSchoolsAsList();
+        } else {
+            $schools = $this->api_model->getSchools();    
+        }
+
         //print_r($schools);
         
         if($schools)         {
