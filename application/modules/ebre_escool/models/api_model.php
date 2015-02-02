@@ -116,7 +116,7 @@ class api_model  extends CI_Model  {
 		FROM school 
 		WHERE school_id=1 
 		*/
-		$this->db->select('school_id, school_name, school_fullname, school_logourl, school_api_url, school_login_api_url
+		$this->db->select('school_id, school_name, school_fullname, school_logourl, school_api_url, school_login_api_url,
 		school_dns_domain,school_email, school_secondary_email, 
 		school_terciary_email, school_official_id, school_locality_id, school_telephoneNumber, 
 		school_mobile, school_bank_account_id, school_notes, school_entryDate, school_last_update, 
