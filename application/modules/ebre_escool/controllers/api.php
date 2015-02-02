@@ -23,8 +23,6 @@ class api extends REST_Controller {
         parent::__construct();
         
         $this->load->model('api_model');
-
-        log_message("debug","********** CONSTRUCTOR FINISH #########################");
     }
 
 	public function index_get() {
